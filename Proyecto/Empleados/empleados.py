@@ -1,3 +1,4 @@
+from time import strftime
 from .Utils.roles import Rol
 from datetime import datetime
 
@@ -15,8 +16,8 @@ class Empleados:
     def __init__(self, nombre: str, apellidos: str, fecha_ingreso_como_trabajador: datetime, fecha_nacimiento: datetime, curp: str, rfc: str, horario: int, salario: float, rol: Rol):
         self.nombre = nombre
         self.apellidos = apellidos
-        self.fecha_ingreso_como_trabajador = datetime()
-        self.fecha_nacimiento = datetime()
+        self.fecha_ingreso_como_trabajador = fecha_ingreso_como_trabajador
+        self.fecha_nacimiento = fecha_nacimiento
         self.curp = curp
         self.rfc = rfc
         self.salario = salario
@@ -24,14 +25,8 @@ class Empleados:
         self.rol = rol
 
     def mostrar_informacion(self):
-        print(f"Nombre: {self.nombre}, 
-        Apellidos: {self.apellidos}, 
-        Fecha de ingreso como trabajador: {self.fecha_ingreso_como_trabajador},
-        Fecha de nacimiento: {self.fecha_nacimiento},
-        CURP: {self.curp},
-        RFC: {self.rfc},
-        Salario: {self.salario},
-        Horario: {self.horario},
-        Rol: {self.rol}
-        )
+        nombre_completo = f"{self.nombre} {self.apellidos}"
+        info = f"\n - Nombre completo: {nombre_completo}, Fecha de Nacimiento: {self.fecha_nacimiento.strftime("%d/%m/%Y")}, Fecha de Ingreso: {self.fecha_ingreso.strftime("%d/%m/%Y")}, RFC: {self.rfc}, CURP: {self.curp}, Salario: {self.salario}, Horario: {self.horario},Rol: {self.rol}"
         return info
+    
+        

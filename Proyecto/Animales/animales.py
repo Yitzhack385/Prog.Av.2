@@ -22,3 +22,18 @@ class Animal:
         print(f"Frecuencia de alimentación: {self.frecuencia_alimentacion}")
         print(f"Tipo de alimentación: {self.tipo_alimentacion}")
         print(f"Vacunas: {'Sí' if self.vacunas else 'No'}")
+
+    def tratar_enfermedad(self, animal, enfermedad):
+        """Elimina una enfermedad de la lista si está presente."""
+        if enfermedad in animal.enfermedades:
+            animal.enfermedades.remove(enfermedad)
+            print(f"{self.nombre} {self.apellidos} ha tratado la {enfermedad} de {animal.tipo_animal}.")
+        else:
+            print(f"{animal.tipo_animal} no tiene {enfermedad}.")
+
+    def listar_enfermedades(self, animal):
+        """Lista las enfermedades actuales del animal."""
+        if animal.enfermedades:
+            print(f"Enfermedades de {animal.tipo_animal}: {', '.join(animal.enfermedades)}")
+        else:
+            print(f"{animal.tipo_animal} no tiene enfermedades actualmente.")

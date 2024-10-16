@@ -1,6 +1,12 @@
 from datetime import date
 
+
 class Visitante:
+    nombre: str
+    apellidos: str
+    fecha_nacimiento: date
+    curp: str
+
     def __init__(self, nombre, apellidos, fecha_nacimiento, curp, fecha_registro=None):
         self.nombre = nombre
         self.apellidos = apellidos
@@ -23,6 +29,7 @@ class Visitante:
             precio_base = 100
         else:
             precio_base = 50
+
         return self.aplicar_descuento(precio_base)
 
     def mostrar_informacion(self):
@@ -32,3 +39,5 @@ class Visitante:
         print(f"CURP: {self.curp}")
         print(f"Número de Visitas: {self.numero_visitas}")
         print(f"Fecha de Registro: {self.fecha_registro}")
+
+        

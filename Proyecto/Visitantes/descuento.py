@@ -1,8 +1,6 @@
-from datetime import datetime
-from visitantes import Visitante
 
-# Clase Visita
-class Visita:
+
+class Visitante:
     PRECIO_ADULTO = 100
     PRECIO_NIÑO = 50
     DESCUENTO = 0.20
@@ -53,4 +51,4 @@ class Visita:
         print(f"Cantidad de adultos: {self.cantidad_adultos}")
         print(f"Cantidad de niños: {self.cantidad_ninos}")
         print(f"Costo total de la visita: ${self.costo_total:.2f}")
-        print(f"Visitantes: {[visitante.nombre for visitante in self.visitantes]}")
+        print(f"Número de Visitas: {self.numero_visitas}")
