@@ -1,4 +1,8 @@
+from datetime import datetime
 from datetime import date
+import bcrypt
+from Empleados import empleados
+from Empleados.Director.director import Director
 from typing import List
 from Empleados.empleados import Empleados
 from Empleados.Admin.admin import Administrador
@@ -8,6 +12,7 @@ from Empleados.Veterinario.veterinario import Veterinario
 from Animales.animales import Animal 
 from Visitantes.Visita.visita import Visita
 from Visitantes.visitantes import Visitante
+from Empleados.Utils.roles import Rol
 
 
 class Zoo:
@@ -17,13 +22,114 @@ class Zoo:
         self.lista_guias: List[Guia] = []
         self.lista_mantenimiento: List[Mantenimiento] = []
         self.lista_veterinarios: List[Veterinario] = []
-        self.lista_administrador: List[Administrador] = []
+        self.lista_administradores: List[Administrador] = []
         self.lista_animales: List[Animal] = []
         self.lista_visitantes: List[Visitante] = [] 
         self.lista_visitas: List[Visita] = []
         #self.lista_enfermedades_animales: List[] = []
-    
+        self.director = Director(
+            nombre="Julio",
+            apellidos="Spielberg",
+            fecha_ingreso_como_trabajador=datetime(2020, 1, 1),
+            fecha_nacimiento=datetime(1980, 1, 1),
+            curp="SPCJ800101MCSRLN02",
+            rfc="SPCJ800101643",
+            horario=8,
+            salario=100000.0,
+            usuario="Noobmaster69",
+            contrasenia=bcrypt.hashpw("IHBD385*".encode('utf-8'), bcrypt.gensalt())
+        )
+    """
+    def __init__(self):    
+        self.director = Director("Julio", "Spielberg", datetime(2020, 1, 1), datetime(1980, 1, 1), "SPCJ800101MCSRLN02", "SPCJ800101643", 8, 100000.0, "Noobmaster69", "IHBD385*")
+    """
+ #Administradores
+
+    def registrar_administrador(self):
+        nombre = input("Ingrese el nombre del administrador: ")
+        apellidos = input("Ingrese los apellidos del administrador: ")
+        fecha_nacimiento = input("Ingrese la fecha de nacimiento (YYYY-MM-DD): ")
+        curp = input("Ingrese el CURP: ")
+        rfc = input("Ingrese el RFC: ")
+        horario = input("Ingrese el horario: ")
+        salario = float(input("Ingrese el salario: "))
+        usuario = input("Ingrese el usuario: ")
+        contrasenia = input("Ingrese la contraseña: ")
+        hash_contrasenia = bcrypt.hashpw(contrasenia.encode('utf-8'), bcrypt.gensalt())
+
+        nuevo_administrador = Administrador(nombre, apellidos, fecha_nacimiento, fecha_nacimiento, curp, rfc, horario, salario, usuario=usuario, contrasenia=hash_contrasenia)
+
+        self.lista_administradores.append(nuevo_administrador)
+        print(f"Administrador {nuevo_administrador.nombre} {nuevo_administrador.apellidos} registrado exitosamente.")
+
+        """
+        nuevo_administrador = Administrador(nombre, apellidos, fecha_nacimiento, fecha_nacimiento, curp, rfc, horario, salario, rol="Administrador", usuario=usuario, contrasenia=contrasenia)
+        self.registrar_administradores(nuevo_administrador)
+
+
+        nuevo_administrador = Administrador(
+            nombre, apellidos, fecha_nacimiento, fecha_nacimiento, curp, rfc, horario, salario, usuario=usuario, contrasenia=hash_contrasenia
+        )
+        
+        self.lista_administradores.append(nuevo_administrador)
+        print(f"Administrador {nuevo_administrador.nombre} {nuevo_administrador.apellidos} registrado exitosamente.")
+        """
+
+    def eliminar_administrador(self, curp: str):
+        for admin in self.lista_administradores:
+            if admin.curp == curp:
+                self.lista_administradores.remove(admin)
+                print(f"Administrador con CURP {curp} eliminado con éxito.")
+                return
+        print(f"Administrador con CURP {curp} no encontrado.")
+
+    def consultar_administradores(self):
+        if not self.lista_administradores:
+            print("No hay administradores registrados.")
+            return
+        for admin in self.lista_administradores:
+            print(f"{admin.nombre} {admin.apellidos} {admin.curp} {admin.rfc}")
+
+
  # Empleados
+        
+    def registrar_empleado(self):
+        nombre = input("Ingresa el nombre del empleado: ")
+        apellidos = input("Ingresa el apellidos del empleado: ")
+        fecha_nacimiento = input("Fecha de nacimiento (YYYY-MM-DD): ")
+        fecha_ingreso_como_trabajador = input("Fecha de ingreso (YYYY-MM-DD): ")
+        rfc = input("RFC: ")
+        curp = input("CURP: ")
+        salario = float(input("Salario: "))
+        horario = input("Horario: ")
+
+        rol_input = input("Ingrese el rol del empleado (Guia/Mantenimiento/Veterinario/Admin/Director): ").capitalize()
+        rol = Rol[rol_input]  
+            
+
+        if rol == Rol.GUIA:
+            nuevo_empleado = Guia(nombre, apellidos, fecha_nacimiento, fecha_ingreso_como_trabajador, curp, rfc, horario, salario)
+            self.lista_guias.append(nuevo_empleado)
+        elif rol == Rol.MANTENIMIENTO:
+            nuevo_empleado = Mantenimiento(nombre, apellidos, fecha_nacimiento, fecha_ingreso_como_trabajador, curp, rfc, horario, salario)
+            self.lista_mantenimiento.append(nuevo_empleado)
+        elif rol == Rol.VETERINARIO:
+            nuevo_empleado = Veterinario(nombre, apellidos, fecha_nacimiento, fecha_ingreso_como_trabajador, curp, rfc, horario, salario)
+            self.lista_veterinarios.append(nuevo_empleado)
+        else:
+            print("Rol no válido.")
+            return
+            
+        # Agregar a la lista general de empleados
+        """
+        self.lista_empleados.append(nuevo_empleado)
+        print(f"Empleado {empleado.nombre} {empleado.apellidos} registrado con éxito en el rol {empleado.rol} {empleado.rol.value}")
+        {empleado.rol.value}
+        """
+        self.lista_empleados.append(nuevo_empleado)
+        print(f"Empleado {nuevo_empleado.nombre} {nuevo_empleado.apellidos} registrado con éxito en el rol {nuevo_empleado.rol}")
+
+        """
     def registrar_empleado(self, empleado: Empleados):
         if isinstance(empleado, Guia):
             self.lista_guias.append(empleado)
@@ -33,7 +139,7 @@ class Zoo:
             self.lista_veterinarios.append(empleado)
         self.lista_empleados.append(empleado)
         print(f"Empleado {empleado.nombre} {empleado.apellidos} registrado con éxito en el rol {empleado.rol}")
-
+        """
     def eliminar_empleado(self, curp: str):
         for lista in [self.lista_guias, self.lista_mantenimiento, self.lista_veterinarios]:
             for empleado in lista:
@@ -90,7 +196,7 @@ class Zoo:
     def eliminar_animal(self):
         index = int(input("Índice del animal a eliminar: "))
         if 0 <= index < len(self.zoo.lista_animales):
-            self.zoo.lista_animales.pop(index)
+            self.lista_animales.pop(index)          #self.zoo.lista_animales.pop(index)
             print("Animal eliminado exitosamente.")
         else:
             print("Índice no válido.")

@@ -1,5 +1,5 @@
 from time import strftime
-from .Utils.roles import Rol
+from Empleados.Utils.roles import Rol
 from datetime import datetime
 
 class Empleados:

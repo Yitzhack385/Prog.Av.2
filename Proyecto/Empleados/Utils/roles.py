@@ -1,7 +1,8 @@
 from enum import Enum
 
 class Rol(Enum):
-    Guia = "Guia"
-    Mantenimiento = "Mantenimiento"
-    Veterinario = "Veterinario"
-    Admin = "Administrador"
+    GUIA = "Guia"
+    MANTENIMIENTO = "Mantenimiento"
+    VETERINARIO = "Veterinario"
+    ADMIN = "Administrador"
+    DIRECTOR = "Director"
