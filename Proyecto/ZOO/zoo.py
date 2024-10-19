@@ -102,13 +102,15 @@ class Zoo:
         curp = input("CURP: ")
         salario = float(input("Salario: "))
         horario = input("Horario: ")
+        
 
         rol_input = input("Ingrese el rol del empleado (Guia/Mantenimiento/Veterinario/Admin/Director): ").capitalize()
         rol = Rol[rol_input]  
             
 
         if rol == Rol.GUIA:
-            nuevo_empleado = Guia(nombre, apellidos, fecha_nacimiento, fecha_ingreso_como_trabajador, curp, rfc, horario, salario)
+            area = input("Área de trabajo (solo para guías): ")
+            nuevo_empleado = Guia(nombre, apellidos, fecha_nacimiento, fecha_ingreso_como_trabajador, rfc, curp, salario, horario, area)
             self.lista_guias.append(nuevo_empleado)
         elif rol == Rol.MANTENIMIENTO:
             nuevo_empleado = Mantenimiento(nombre, apellidos, fecha_nacimiento, fecha_ingreso_como_trabajador, curp, rfc, horario, salario)
@@ -121,25 +123,11 @@ class Zoo:
             return
             
         # Agregar a la lista general de empleados
-        """
-        self.lista_empleados.append(nuevo_empleado)
-        print(f"Empleado {empleado.nombre} {empleado.apellidos} registrado con éxito en el rol {empleado.rol} {empleado.rol.value}")
-        {empleado.rol.value}
-        """
+        
         self.lista_empleados.append(nuevo_empleado)
         print(f"Empleado {nuevo_empleado.nombre} {nuevo_empleado.apellidos} registrado con éxito en el rol {nuevo_empleado.rol}")
 
-        """
-    def registrar_empleado(self, empleado: Empleados):
-        if isinstance(empleado, Guia):
-            self.lista_guias.append(empleado)
-        elif isinstance(empleado, Mantenimiento):
-            self.lista_mantenimiento.append(empleado)
-        elif isinstance(empleado, Veterinario):
-            self.lista_veterinarios.append(empleado)
-        self.lista_empleados.append(empleado)
-        print(f"Empleado {empleado.nombre} {empleado.apellidos} registrado con éxito en el rol {empleado.rol}")
-        """
+        
     def eliminar_empleado(self, curp: str):
         for lista in [self.lista_guias, self.lista_mantenimiento, self.lista_veterinarios]:
             for empleado in lista:
@@ -231,57 +219,9 @@ class Zoo:
         for visita in self.lista_visitas:
             visita.mostrar_informacion()
     
-#------------------------------------------------------------------------------
 
-"""
-    
-    
-    
-    def registrar_mantenimiento(self, mantenimiento):
-        self.mantenimientos.append(mantenimiento)
-        print(f"Mantenimiento registrado para el animal con ID {mantenimiento.animal_id}.")
 
-    def registrar_animal(self, animal):
-        self.animales.append(animal)
-        print(f"Animal {animal.tipo_animal} registrado con éxito.")
-
-    def eliminar_animal(self, id_animal):
-        for animal in self.animales:
-            if animal.id == id_animal:
-                self.animales.remove(animal)
-                print(f"Animal {animal.tipo_animal} eliminado.")
-                return
-        print(f"No se encontró el animal con ID {id_animal}.")
     
-    def consultar_animales(self):
-        for animal in self.animales:
-            animal.mostrar_informacion()
-
-    def modificar_animal(self, id_animal, nuevos_datos):
-        for animal in self.animales:
-            if animal.id == id_animal:
-                animal.actualizar_datos(nuevos_datos)
-                print(f"Animal {animal.tipo_animal} actualizado.")
-                return
-        print(f"No se encontró el animal con ID {id_animal}.")
-    
-    def consultar_visitantes(self):
-        for visitante in self.visitantes:
-            visitante.mostrar_informacion()
-    
-    def consultar_visitas(self):
-        for visita in self.visitas:
-            visita.mostrar_informacion()
-    
-    def consultar_mantenimientos(self):
-        for mantenimiento in self.mantenimientos:
-            mantenimiento.mostrar_proceso()
-
-    def consultar_enfermedades_animales(self):
-        for animal in self.animales:
-            for enfermedad in animal.enfermedades:
-                print(f"Enfermedad: {enfermedad.descripcion}, animal: {animal.tipo_animal}, fecha de inicio: {enfermedad.fecha_inicio}, fecha de culminación: {enfermedad.fecha_culminacion}")
-"""
     
 
     

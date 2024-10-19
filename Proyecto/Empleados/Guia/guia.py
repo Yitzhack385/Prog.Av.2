@@ -3,7 +3,7 @@ from Empleados.Utils.roles import Rol
 
 class Guia(Empleados):
     def __init__(self, nombre, apellidos, fecha_nacimiento, fecha_ingreso, rfc, curp, salario, horario, area):
-        super().__init__(nombre, apellidos, fecha_nacimiento, fecha_ingreso, rfc, curp, salario, horario, "Guía")
+        super().__init__(nombre, apellidos, fecha_nacimiento, fecha_ingreso, rfc, curp, salario, horario, rol=Rol.GUIA)
         self.area = area
         self.visitas_realizadas = 0
 

@@ -27,13 +27,6 @@ class Menu:
                 print("Inicio de sesión exitoso como Director.")
                 self.menu_director()  # Redirigir al menú del director
                 return
-            
-            """
-            if usuario == self.zoo.director.usuario and contrasenia == self.zoo.director.contrasenia:
-                print("Inicio de sesión exitoso como Director.")
-                self.menu_director()  # Redirigir al menú del director
-                return
-            """
 
             # Verificar administrador
 
@@ -42,14 +35,6 @@ class Menu:
                     print("Inicio de sesión exitoso como Administrador.")
                     self.menu_administrador()  # Redirigir al menú del administrador
                     return
-
-            """
-            for administrador in self.zoo.lista_administradores:
-                if administrador.usuario == usuario and administrador.contrasenia == contrasenia:
-                    print("Inicio de sesión exitoso como Administrador.")
-                    self.menu_administrador()  # Redirigir al menú del administrador
-                    return
-            """
             
             intentos += 1
             print(f"Usuario o contraseña incorrectos. Te quedan {5 - intentos} intento(s).")
